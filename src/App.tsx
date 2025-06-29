@@ -5,6 +5,12 @@ import { Preview } from './components/Layout/Preview';
 import { GradientsPanel } from './components/Panels/GradientsPanel';
 import { LayoutPanel } from './components/Panels/LayoutPanel';
 import { FlexboxPanel } from './components/Panels/FlexboxPanel';
+import { GridPanel } from './components/Panels/GridPanel';
+import { TypographyPanel } from './components/Panels/TypographyPanel';
+import { ColorsPanel } from './components/Panels/ColorsPanel';
+import { SpacingPanel } from './components/Panels/SpacingPanel';
+import { BordersPanel } from './components/Panels/BordersPanel';
+import { EffectsPanel } from './components/Panels/EffectsPanel';
 import { CodePanel } from './components/Panels/CodePanel';
 import { useStyleConfig } from './hooks/useStyleConfig';
 import { gradientPresets } from './data/presets';
@@ -76,31 +82,26 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
   };
 
   const handleImport = () => {
-    // TODO: Implement import functionality
     console.log('Import functionality to be implemented');
   };
 
   const handleSave = () => {
-    // TODO: Implement save functionality
     console.log('Save functionality to be implemented');
   };
 
   const handleShare = () => {
-    // TODO: Implement share functionality
     console.log('Share functionality to be implemented');
   };
 
   const generatePreviewStyles = (): React.CSSProperties => {
     const styles: React.CSSProperties = {};
     
-    // Convert config to React.CSSProperties
     Object.entries(config).forEach(([key, value]) => {
       if (value && value !== '' && typeof value !== 'object') {
         (styles as any)[key] = value;
       }
     });
 
-    // Add gradient if configured
     if (colorStops.length > 0) {
       const sortedStops = [...colorStops].sort((a, b) => a.position - b.position);
       const colorStopString = sortedStops.map(stop => `${stop.color} ${stop.position}%`).join(', ');
@@ -224,6 +225,190 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
             onOrderChange={(order) => updateConfig({ order })}
           />
         );
+
+      case 'grid':
+        return (
+          <GridPanel
+            gridTemplateColumns={config.gridTemplateColumns}
+            onGridTemplateColumnsChange={(gridTemplateColumns) => updateConfig({ gridTemplateColumns })}
+            gridTemplateRows={config.gridTemplateRows}
+            onGridTemplateRowsChange={(gridTemplateRows) => updateConfig({ gridTemplateRows })}
+            gridTemplateAreas={config.gridTemplateAreas}
+            onGridTemplateAreasChange={(gridTemplateAreas) => updateConfig({ gridTemplateAreas })}
+            gridAutoFlow={config.gridAutoFlow}
+            onGridAutoFlowChange={(gridAutoFlow) => updateConfig({ gridAutoFlow })}
+            gridAutoRows={config.gridAutoRows}
+            onGridAutoRowsChange={(gridAutoRows) => updateConfig({ gridAutoRows })}
+            gridAutoColumns={config.gridAutoColumns}
+            onGridAutoColumnsChange={(gridAutoColumns) => updateConfig({ gridAutoColumns })}
+            gridColumn={config.gridColumn}
+            onGridColumnChange={(gridColumn) => updateConfig({ gridColumn })}
+            gridRow={config.gridRow}
+            onGridRowChange={(gridRow) => updateConfig({ gridRow })}
+            gridColumnStart={config.gridColumnStart}
+            onGridColumnStartChange={(gridColumnStart) => updateConfig({ gridColumnStart })}
+            gridColumnEnd={config.gridColumnEnd}
+            onGridColumnEndChange={(gridColumnEnd) => updateConfig({ gridColumnEnd })}
+            gridRowStart={config.gridRowStart}
+            onGridRowStartChange={(gridRowStart) => updateConfig({ gridRowStart })}
+            gridRowEnd={config.gridRowEnd}
+            onGridRowEndChange={(gridRowEnd) => updateConfig({ gridRowEnd })}
+            gridArea={config.gridArea}
+            onGridAreaChange={(gridArea) => updateConfig({ gridArea })}
+            gap={config.gap}
+            onGapChange={(gap) => updateConfig({ gap })}
+            rowGap={config.rowGap}
+            onRowGapChange={(rowGap) => updateConfig({ rowGap })}
+            columnGap={config.columnGap}
+            onColumnGapChange={(columnGap) => updateConfig({ columnGap })}
+          />
+        );
+
+      case 'typography':
+        return (
+          <TypographyPanel
+            fontFamily={config.fontFamily}
+            onFontFamilyChange={(fontFamily) => updateConfig({ fontFamily })}
+            fontSize={config.fontSize}
+            onFontSizeChange={(fontSize) => updateConfig({ fontSize })}
+            fontWeight={config.fontWeight}
+            onFontWeightChange={(fontWeight) => updateConfig({ fontWeight })}
+            fontStyle={config.fontStyle}
+            onFontStyleChange={(fontStyle) => updateConfig({ fontStyle })}
+            lineHeight={config.lineHeight}
+            onLineHeightChange={(lineHeight) => updateConfig({ lineHeight })}
+            letterSpacing={config.letterSpacing}
+            onLetterSpacingChange={(letterSpacing) => updateConfig({ letterSpacing })}
+            wordSpacing={config.wordSpacing}
+            onWordSpacingChange={(wordSpacing) => updateConfig({ wordSpacing })}
+            textAlign={config.textAlign}
+            onTextAlignChange={(textAlign) => updateConfig({ textAlign })}
+            textTransform={config.textTransform}
+            onTextTransformChange={(textTransform) => updateConfig({ textTransform })}
+            textDecoration={config.textDecoration}
+            onTextDecorationChange={(textDecoration) => updateConfig({ textDecoration })}
+            textIndent={config.textIndent}
+            onTextIndentChange={(textIndent) => updateConfig({ textIndent })}
+            whiteSpace={config.whiteSpace}
+            onWhiteSpaceChange={(whiteSpace) => updateConfig({ whiteSpace })}
+            wordBreak={config.wordBreak}
+            onWordBreakChange={(wordBreak) => updateConfig({ wordBreak })}
+            textOverflow={config.textOverflow}
+            onTextOverflowChange={(textOverflow) => updateConfig({ textOverflow })}
+            writingMode={config.writingMode}
+            onWritingModeChange={(writingMode) => updateConfig({ writingMode })}
+            color={config.color}
+            onColorChange={(color) => updateConfig({ color })}
+            textShadow={config.textShadow}
+            onTextShadowChange={(textShadow) => updateConfig({ textShadow })}
+          />
+        );
+
+      case 'colors':
+        return (
+          <ColorsPanel
+            color={config.color}
+            onColorChange={(color) => updateConfig({ color })}
+            backgroundColor={config.backgroundColor}
+            onBackgroundColorChange={(backgroundColor) => updateConfig({ backgroundColor })}
+            opacity={config.opacity}
+            onOpacityChange={(opacity) => updateConfig({ opacity })}
+            backgroundImage={config.backgroundImage}
+            onBackgroundImageChange={(backgroundImage) => updateConfig({ backgroundImage })}
+            backgroundSize={config.backgroundSize}
+            onBackgroundSizeChange={(backgroundSize) => updateConfig({ backgroundSize })}
+            backgroundPosition={config.backgroundPosition}
+            onBackgroundPositionChange={(backgroundPosition) => updateConfig({ backgroundPosition })}
+            backgroundRepeat={config.backgroundRepeat}
+            onBackgroundRepeatChange={(backgroundRepeat) => updateConfig({ backgroundRepeat })}
+            backgroundAttachment={config.backgroundAttachment}
+            onBackgroundAttachmentChange={(backgroundAttachment) => updateConfig({ backgroundAttachment })}
+            backgroundClip={config.backgroundClip}
+            onBackgroundClipChange={(backgroundClip) => updateConfig({ backgroundClip })}
+            backgroundOrigin={config.backgroundOrigin}
+            onBackgroundOriginChange={(backgroundOrigin) => updateConfig({ backgroundOrigin })}
+            backgroundBlendMode={config.backgroundBlendMode}
+            onBackgroundBlendModeChange={(backgroundBlendMode) => updateConfig({ backgroundBlendMode })}
+          />
+        );
+
+      case 'spacing':
+        return (
+          <SpacingPanel
+            margin={config.margin}
+            onMarginChange={(margin) => updateConfig({ margin })}
+            marginTop={config.marginTop}
+            onMarginTopChange={(marginTop) => updateConfig({ marginTop })}
+            marginRight={config.marginRight}
+            onMarginRightChange={(marginRight) => updateConfig({ marginRight })}
+            marginBottom={config.marginBottom}
+            onMarginBottomChange={(marginBottom) => updateConfig({ marginBottom })}
+            marginLeft={config.marginLeft}
+            onMarginLeftChange={(marginLeft) => updateConfig({ marginLeft })}
+            padding={config.padding}
+            onPaddingChange={(padding) => updateConfig({ padding })}
+            paddingTop={config.paddingTop}
+            onPaddingTopChange={(paddingTop) => updateConfig({ paddingTop })}
+            paddingRight={config.paddingRight}
+            onPaddingRightChange={(paddingRight) => updateConfig({ paddingRight })}
+            paddingBottom={config.paddingBottom}
+            onPaddingBottomChange={(paddingBottom) => updateConfig({ paddingBottom })}
+            paddingLeft={config.paddingLeft}
+            onPaddingLeftChange={(paddingLeft) => updateConfig({ paddingLeft })}
+            boxSizing={config.boxSizing}
+            onBoxSizingChange={(boxSizing) => updateConfig({ boxSizing })}
+          />
+        );
+
+      case 'borders':
+        return (
+          <BordersPanel
+            border={config.border}
+            onBorderChange={(border) => updateConfig({ border })}
+            borderTop={config.borderTop}
+            onBorderTopChange={(borderTop) => updateConfig({ borderTop })}
+            borderRight={config.borderRight}
+            onBorderRightChange={(borderRight) => updateConfig({ borderRight })}
+            borderBottom={config.borderBottom}
+            onBorderBottomChange={(borderBottom) => updateConfig({ borderBottom })}
+            borderLeft={config.borderLeft}
+            onBorderLeftChange={(borderLeft) => updateConfig({ borderLeft })}
+            borderWidth={config.borderWidth}
+            onBorderWidthChange={(borderWidth) => updateConfig({ borderWidth })}
+            borderStyle={config.borderStyle}
+            onBorderStyleChange={(borderStyle) => updateConfig({ borderStyle })}
+            borderColor={config.borderColor}
+            onBorderColorChange={(borderColor) => updateConfig({ borderColor })}
+            borderRadius={config.borderRadius}
+            onBorderRadiusChange={(borderRadius) => updateConfig({ borderRadius })}
+            borderTopLeftRadius={config.borderTopLeftRadius}
+            onBorderTopLeftRadiusChange={(borderTopLeftRadius) => updateConfig({ borderTopLeftRadius })}
+            borderTopRightRadius={config.borderTopRightRadius}
+            onBorderTopRightRadiusChange={(borderTopRightRadius) => updateConfig({ borderTopRightRadius })}
+            borderBottomLeftRadius={config.borderBottomLeftRadius}
+            onBorderBottomLeftRadiusChange={(borderBottomLeftRadius) => updateConfig({ borderBottomLeftRadius })}
+            borderBottomRightRadius={config.borderBottomRightRadius}
+            onBorderBottomRightRadiusChange={(borderBottomRightRadius) => updateConfig({ borderBottomRightRadius })}
+          />
+        );
+
+      case 'effects':
+        return (
+          <EffectsPanel
+            boxShadow={config.boxShadow}
+            onBoxShadowChange={(boxShadow) => updateConfig({ boxShadow })}
+            textShadow={config.textShadow}
+            onTextShadowChange={(textShadow) => updateConfig({ textShadow })}
+            filter={config.filter}
+            onFilterChange={(filter) => updateConfig({ filter })}
+            backdropFilter={config.backdropFilter}
+            onBackdropFilterChange={(backdropFilter) => updateConfig({ backdropFilter })}
+            transform={config.transform}
+            onTransformChange={(transform) => updateConfig({ transform })}
+            transformOrigin={config.transformOrigin}
+            onTransformOriginChange={(transformOrigin) => updateConfig({ transformOrigin })}
+          />
+        );
       
       case 'code':
         return (
@@ -249,7 +434,6 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
   return (
     <div className={`min-h-screen bg-gray-100 ${fullscreen ? 'fixed inset-0 z-50' : ''}`}>
       <div className="flex flex-col h-screen">
-        {/* Header */}
         <Header
           copied={copied}
           onCopy={handleCopy}
@@ -265,7 +449,6 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
         />
 
         <div className="flex flex-1 overflow-hidden">
-          {/* Sidebar */}
           {!previewMode && (
             <Sidebar
               activeTab={activeTab}
@@ -273,9 +456,7 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
             />
           )}
 
-          {/* Main Content */}
           <div className="flex flex-1 overflow-hidden">
-            {/* Control Panel */}
             {!previewMode && (
               <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
                 <div className="p-4">
@@ -287,7 +468,6 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
               </div>
             )}
 
-            {/* Preview */}
             <Preview
               styles={generatePreviewStyles()}
               html={htmlContent}
