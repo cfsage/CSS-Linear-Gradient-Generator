@@ -105,12 +105,30 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
   const generatePreviewStyles = (): React.CSSProperties => {
     const styles: React.CSSProperties = {};
     
+    // Process all config properties
     Object.entries(config).forEach(([key, value]) => {
-      if (value && value !== '' && typeof value !== 'object') {
-        (styles as any)[key] = value;
+      if (value !== undefined && value !== '' && value !== null && typeof value !== 'object') {
+        // Convert camelCase to kebab-case for CSS properties
+        const cssProperty = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+        
+        // Handle special cases
+        if (key === 'zIndex') {
+          (styles as any).zIndex = Number(value);
+        } else if (key === 'opacity') {
+          (styles as any).opacity = Number(value);
+        } else if (key === 'flexGrow') {
+          (styles as any).flexGrow = Number(value);
+        } else if (key === 'flexShrink') {
+          (styles as any).flexShrink = Number(value);
+        } else if (key === 'order') {
+          (styles as any).order = Number(value);
+        } else {
+          (styles as any)[key] = value;
+        }
       }
     });
 
+    // Handle gradient generation
     if (colorStops.length > 0) {
       const sortedStops = [...colorStops].sort((a, b) => a.position - b.position);
       const colorStopString = sortedStops.map(stop => `${stop.color} ${stop.position}%`).join(', ');

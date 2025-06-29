@@ -252,7 +252,7 @@ export const useStyleConfig = () => {
     
     // Add all other styles
     Object.entries(config).forEach(([key, value]) => {
-      if (value && value !== '' && typeof value !== 'object') {
+      if (value !== undefined && value !== '' && value !== null && typeof value !== 'object') {
         const cssProperty = key.replace(/([A-Z])/g, '-$1').toLowerCase();
         styles.push(`${cssProperty}: ${value}`);
       }
