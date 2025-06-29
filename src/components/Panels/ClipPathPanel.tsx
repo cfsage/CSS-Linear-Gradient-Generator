@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Scissors, Square, Circle, Triangle } from 'lucide-react';
+import { SliderControl } from '../Common/SliderControl';
 
 interface ClipPathPanelProps {
   clipPath: string;
@@ -93,51 +94,6 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
     }
   ];
 
-  const SliderControl = ({ 
-    label, 
-    value, 
-    onChange, 
-    min = 0, 
-    max = 100, 
-    step = 1, 
-    unit = '%' 
-  }: {
-    label: string;
-    value: number;
-    onChange: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-    unit?: string;
-  }) => (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-700">{label}</label>
-        <span className="text-xs text-gray-500">{value}{unit}</span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <input
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-16 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-        />
-      </div>
-    </div>
-  );
-
   const generatePolygonPath = () => {
     const points = polygonPoints.map(point => `${point.x}% ${point.y}%`).join(', ');
     return `polygon(${points})`;
@@ -209,7 +165,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               <button
                 key={shape.name}
                 onClick={() => onClipPathChange(shape.value)}
-                className="flex items-center space-x-2 px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors border border-purple-200"
+                className="flex items-center space-x-2 px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-all duration-200 border border-purple-200 hover:border-purple-300 hover:shadow-sm"
               >
                 {Icon && <Icon size={12} />}
                 <span>{shape.name}</span>
@@ -226,9 +182,9 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
           {(['polygon', 'circle', 'ellipse', 'inset'] as const).map((type) => (
             <label
               key={type}
-              className={`relative flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all ${
+              className={`relative flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                 shapeType === type
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
+                  ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
@@ -253,7 +209,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
             <h3 className="text-sm font-semibold text-gray-800">Polygon Points</h3>
             <button
               onClick={addPolygonPoint}
-              className="px-2 py-1 bg-purple-600 text-white rounded text-xs hover:bg-purple-700 transition-colors"
+              className="px-2 py-1 bg-purple-600 text-white rounded text-xs hover:bg-purple-700 transition-all duration-200 hover:shadow-sm"
             >
               Add Point
             </button>
@@ -267,7 +223,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
                   {polygonPoints.length > 3 && (
                     <button
                       onClick={() => removePolygonPoint(index)}
-                      className="text-red-600 hover:text-red-800 text-xs"
+                      className="text-red-600 hover:text-red-800 text-xs transition-all duration-200"
                     >
                       Remove
                     </button>
@@ -282,6 +238,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
                     max={100}
                     step={1}
                     unit="%"
+                    color="blue"
                   />
                   <SliderControl
                     label="Y"
@@ -291,6 +248,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
                     max={100}
                     step={1}
                     unit="%"
+                    color="green"
                   />
                 </div>
               </div>
@@ -311,6 +269,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="purple"
             />
             <SliderControl
               label="Center X"
@@ -320,6 +279,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="blue"
             />
             <SliderControl
               label="Center Y"
@@ -329,6 +289,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="green"
             />
           </div>
         </div>
@@ -346,6 +307,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="purple"
             />
             <SliderControl
               label="Radius Y"
@@ -355,6 +317,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="blue"
             />
             <SliderControl
               label="Center X"
@@ -364,6 +327,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="green"
             />
             <SliderControl
               label="Center Y"
@@ -373,6 +337,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={100}
               step={1}
               unit="%"
+              color="yellow"
             />
           </div>
         </div>
@@ -390,6 +355,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={50}
               step={1}
               unit="%"
+              color="red"
             />
             <SliderControl
               label="Right"
@@ -399,6 +365,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={50}
               step={1}
               unit="%"
+              color="blue"
             />
             <SliderControl
               label="Bottom"
@@ -408,6 +375,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={50}
               step={1}
               unit="%"
+              color="green"
             />
             <SliderControl
               label="Left"
@@ -417,6 +385,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={50}
               step={1}
               unit="%"
+              color="yellow"
             />
             <SliderControl
               label="Border Radius"
@@ -426,6 +395,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
               max={50}
               step={1}
               unit="%"
+              color="purple"
             />
           </div>
         </div>
@@ -436,7 +406,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
         <h3 className="text-sm font-semibold text-gray-800">Preview</h3>
         <div className="bg-gray-100 p-8 rounded-lg flex items-center justify-center">
           <div 
-            className="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-500"
+            className="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-500 transition-all duration-300"
             style={{ clipPath: clipPath || 'none' }}
           />
         </div>
@@ -450,7 +420,7 @@ export const ClipPathPanel: React.FC<ClipPathPanelProps> = ({
           onChange={(e) => onClipPathChange(e.target.value)}
           placeholder="polygon(50% 0%, 0% 100%, 100% 100%)"
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
         />
       </div>
 

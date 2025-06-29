@@ -1,5 +1,6 @@
 import React from 'react';
 import { Eye, EyeOff, Layers } from 'lucide-react';
+import { SliderControl } from '../Common/SliderControl';
 
 interface VisibilityPanelProps {
   visibility: string;
@@ -33,56 +34,6 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
   const visibilityOptions = ['visible', 'hidden', 'collapse'];
   const overflowOptions = ['visible', 'hidden', 'scroll', 'auto', 'clip'];
 
-  const SliderControl = ({ 
-    label, 
-    value, 
-    onChange, 
-    min = 0, 
-    max = 100, 
-    step = 1, 
-    unit = '',
-    icon 
-  }: {
-    label: string;
-    value: number;
-    onChange: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-    unit?: string;
-    icon?: React.ReactNode;
-  }) => (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-700 flex items-center space-x-1">
-          {icon}
-          <span>{label}</span>
-        </label>
-        <span className="text-xs text-gray-500">{value}{unit}</span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <input
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-20 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-        />
-      </div>
-    </div>
-  );
-
   return (
     <div className="space-y-6">
       {/* Visibility */}
@@ -95,9 +46,9 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
           {visibilityOptions.map((option) => (
             <label
               key={option}
-              className={`relative flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all ${
+              className={`relative flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                 visibility === option
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
+                  ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
@@ -145,6 +96,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
           step={0.01}
           unit=""
           icon={<EyeOff size={12} />}
+          color="purple"
         />
         
         {/* Opacity Demo */}
@@ -178,6 +130,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
           step={1}
           unit=""
           icon={<Layers size={12} />}
+          color="blue"
         />
         
         {/* Z-Index Demo */}
@@ -210,7 +163,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
           <select
             value={overflow}
             onChange={(e) => onOverflowChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {overflowOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -224,7 +177,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
           <select
             value={overflowX}
             onChange={(e) => onOverflowXChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {overflowOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -238,7 +191,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
           <select
             value={overflowY}
             onChange={(e) => onOverflowYChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {overflowOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -273,7 +226,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
               onVisibilityChange('visible');
               onOpacityChange(1);
             }}
-            className="px-3 py-2 text-xs font-medium text-green-600 hover:text-green-800 hover:bg-green-50 rounded-md transition-colors border border-green-200"
+            className="px-3 py-2 text-xs font-medium text-green-600 hover:text-green-800 hover:bg-green-50 rounded-md transition-all duration-200 border border-green-200 hover:border-green-300 hover:shadow-sm"
           >
             Fully Visible
           </button>
@@ -282,7 +235,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
               onVisibilityChange('hidden');
               onOpacityChange(0);
             }}
-            className="px-3 py-2 text-xs font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-md transition-colors border border-red-200"
+            className="px-3 py-2 text-xs font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-md transition-all duration-200 border border-red-200 hover:border-red-300 hover:shadow-sm"
           >
             Fully Hidden
           </button>
@@ -291,7 +244,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
               onVisibilityChange('visible');
               onOpacityChange(0.5);
             }}
-            className="px-3 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-colors border border-blue-200"
+            className="px-3 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-all duration-200 border border-blue-200 hover:border-blue-300 hover:shadow-sm"
           >
             Semi-Transparent
           </button>
@@ -300,7 +253,7 @@ export const VisibilityPanel: React.FC<VisibilityPanelProps> = ({
               onVisibilityChange('visible');
               onOpacityChange(0.1);
             }}
-            className="px-3 py-2 text-xs font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md transition-colors border border-gray-200"
+            className="px-3 py-2 text-xs font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-md transition-all duration-200 border border-gray-200 hover:border-gray-300 hover:shadow-sm"
           >
             Nearly Hidden
           </button>

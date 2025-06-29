@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Zap, Layers, Grid3X3, Palette } from 'lucide-react';
+import { SliderControl } from '../Common/SliderControl';
 
 interface ModernCSSPanelProps {
   colorScheme: string;
@@ -91,51 +92,6 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
     }
   ];
 
-  const SliderControl = ({ 
-    label, 
-    value, 
-    onChange, 
-    min = 0, 
-    max = 100, 
-    step = 1, 
-    unit = '' 
-  }: {
-    label: string;
-    value: number;
-    onChange: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-    unit?: string;
-  }) => (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-700">{label}</label>
-        <span className="text-xs text-gray-500">{value}{unit}</span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <input
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-16 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-        />
-      </div>
-    </div>
-  );
-
   return (
     <div className="space-y-6">
       {/* Color Scheme */}
@@ -148,9 +104,9 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
           {colorSchemeOptions.map((option) => (
             <label
               key={option}
-              className={`relative flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all ${
+              className={`relative flex items-center justify-center p-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                 colorScheme === option
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
+                  ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
@@ -183,43 +139,45 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
             type="color"
             value={accentColor}
             onChange={(e) => onAccentColorChange(e.target.value)}
-            className="w-12 h-10 rounded border-2 border-gray-200 cursor-pointer"
+            className="w-12 h-10 rounded border-2 border-gray-200 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg"
           />
           <input
             type="text"
             value={accentColor}
             onChange={(e) => onAccentColorChange(e.target.value)}
             placeholder="auto"
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           />
         </div>
         
         <div className="p-3 bg-gray-50 rounded-lg">
           <div className="text-xs text-gray-600 mb-2">Accent Color Preview:</div>
           <div className="space-y-2">
-            <input 
-              type="checkbox" 
-              checked 
-              readOnly
-              style={{ accentColor: accentColor || undefined }}
-              className="mr-2"
-            />
-            <label className="text-sm">Checkbox with custom accent color</label>
-            <br />
-            <input 
-              type="radio" 
-              checked 
-              readOnly
-              style={{ accentColor: accentColor || undefined }}
-              className="mr-2"
-            />
-            <label className="text-sm">Radio button with custom accent color</label>
-            <br />
+            <div className="flex items-center space-x-2">
+              <input 
+                type="checkbox" 
+                checked 
+                readOnly
+                style={{ accentColor: accentColor || undefined }}
+                className="transition-all duration-200"
+              />
+              <label className="text-sm">Checkbox with custom accent color</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input 
+                type="radio" 
+                checked 
+                readOnly
+                style={{ accentColor: accentColor || undefined }}
+                className="transition-all duration-200"
+              />
+              <label className="text-sm">Radio button with custom accent color</label>
+            </div>
             <input 
               type="range" 
               defaultValue="50"
               style={{ accentColor: accentColor || undefined }}
-              className="w-full"
+              className="w-full transition-all duration-200"
             />
           </div>
         </div>
@@ -238,7 +196,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
           <select
             value={containerType}
             onChange={(e) => onContainerTypeChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {containerTypeOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -254,7 +212,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
             value={containerName}
             onChange={(e) => onContainerNameChange(e.target.value)}
             placeholder="sidebar, main, card"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           />
         </div>
 
@@ -272,7 +230,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
         <select
           value={aspectRatio}
           onChange={(e) => setAspectRatio(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
         >
           {aspectRatioOptions.map((option) => (
             <option key={option} value={option}>{option}</option>
@@ -283,7 +241,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
         <div className="p-3 bg-gray-50 rounded-lg">
           <div className="text-xs text-gray-600 mb-2">Aspect Ratio Preview:</div>
           <div 
-            className="bg-gradient-to-br from-blue-400 to-purple-500 rounded"
+            className="bg-gradient-to-br from-blue-400 to-purple-500 rounded transition-all duration-300"
             style={{ aspectRatio: aspectRatio === 'auto' ? undefined : aspectRatio }}
           >
             <div className="p-4 text-white text-sm font-medium">
@@ -303,7 +261,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
           <select
             value={objectFit}
             onChange={(e) => setObjectFit(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {objectFitOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -317,7 +275,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
           <select
             value={objectPosition}
             onChange={(e) => setObjectPosition(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {objectPositionOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -332,7 +290,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
             <img
               src="https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
               alt="Object fit example"
-              className="w-full h-full"
+              className="w-full h-full transition-all duration-300"
               style={{ 
                 objectFit: objectFit as any,
                 objectPosition: objectPosition 
@@ -352,7 +310,7 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
           <select
             value={scrollbarWidth}
             onChange={(e) => setScrollbarWidth(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {scrollbarWidthOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
@@ -368,14 +326,14 @@ export const ModernCSSPanel: React.FC<ModernCSSPanelProps> = ({
               type="color"
               value={scrollbarColor === 'auto' ? '#6366f1' : scrollbarColor}
               onChange={(e) => setScrollbarColor(e.target.value)}
-              className="w-12 h-10 rounded border-2 border-gray-200 cursor-pointer"
+              className="w-12 h-10 rounded border-2 border-gray-200 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg"
             />
             <input
               type="text"
               value={scrollbarColor}
               onChange={(e) => setScrollbarColor(e.target.value)}
               placeholder="auto"
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
             />
           </div>
         </div>
