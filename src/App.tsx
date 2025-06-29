@@ -11,6 +11,15 @@ import { ColorsPanel } from './components/Panels/ColorsPanel';
 import { SpacingPanel } from './components/Panels/SpacingPanel';
 import { BordersPanel } from './components/Panels/BordersPanel';
 import { EffectsPanel } from './components/Panels/EffectsPanel';
+import { FiltersPanel } from './components/Panels/FiltersPanel';
+import { TransformsPanel } from './components/Panels/TransformsPanel';
+import { AnimationsPanel } from './components/Panels/AnimationsPanel';
+import { InteractionsPanel } from './components/Panels/InteractionsPanel';
+import { VisibilityPanel } from './components/Panels/VisibilityPanel';
+import { ResponsivePanel } from './components/Panels/ResponsivePanel';
+import { ClipPathPanel } from './components/Panels/ClipPathPanel';
+import { VariablesPanel } from './components/Panels/VariablesPanel';
+import { ModernCSSPanel } from './components/Panels/ModernCSSPanel';
 import { CodePanel } from './components/Panels/CodePanel';
 import { useStyleConfig } from './hooks/useStyleConfig';
 import { gradientPresets } from './data/presets';
@@ -407,6 +416,132 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
             onTransformChange={(transform) => updateConfig({ transform })}
             transformOrigin={config.transformOrigin}
             onTransformOriginChange={(transformOrigin) => updateConfig({ transformOrigin })}
+          />
+        );
+
+      case 'filters':
+        return (
+          <FiltersPanel
+            filter={config.filter}
+            onFilterChange={(filter) => updateConfig({ filter })}
+            backdropFilter={config.backdropFilter}
+            onBackdropFilterChange={(backdropFilter) => updateConfig({ backdropFilter })}
+          />
+        );
+
+      case 'transforms':
+        return (
+          <TransformsPanel
+            transform={config.transform}
+            onTransformChange={(transform) => updateConfig({ transform })}
+            transformOrigin={config.transformOrigin}
+            onTransformOriginChange={(transformOrigin) => updateConfig({ transformOrigin })}
+          />
+        );
+
+      case 'animations':
+        return (
+          <AnimationsPanel
+            animation={config.animation}
+            onAnimationChange={(animation) => updateConfig({ animation })}
+            animationName={config.animationName}
+            onAnimationNameChange={(animationName) => updateConfig({ animationName })}
+            animationDuration={config.animationDuration}
+            onAnimationDurationChange={(animationDuration) => updateConfig({ animationDuration })}
+            animationTimingFunction={config.animationTimingFunction}
+            onAnimationTimingFunctionChange={(animationTimingFunction) => updateConfig({ animationTimingFunction })}
+            animationDelay={config.animationDelay}
+            onAnimationDelayChange={(animationDelay) => updateConfig({ animationDelay })}
+            animationIterationCount={config.animationIterationCount}
+            onAnimationIterationCountChange={(animationIterationCount) => updateConfig({ animationIterationCount })}
+            animationDirection={config.animationDirection}
+            onAnimationDirectionChange={(animationDirection) => updateConfig({ animationDirection })}
+            animationFillMode={config.animationFillMode}
+            onAnimationFillModeChange={(animationFillMode) => updateConfig({ animationFillMode })}
+            animationPlayState={config.animationPlayState}
+            onAnimationPlayStateChange={(animationPlayState) => updateConfig({ animationPlayState })}
+          />
+        );
+
+      case 'interactions':
+        return (
+          <InteractionsPanel
+            cursor={config.cursor}
+            onCursorChange={(cursor) => updateConfig({ cursor })}
+            userSelect={config.userSelect}
+            onUserSelectChange={(userSelect) => updateConfig({ userSelect })}
+            pointerEvents={config.pointerEvents}
+            onPointerEventsChange={(pointerEvents) => updateConfig({ pointerEvents })}
+            touchAction={config.touchAction}
+            onTouchActionChange={(touchAction) => updateConfig({ touchAction })}
+            scrollBehavior={config.scrollBehavior}
+            onScrollBehaviorChange={(scrollBehavior) => updateConfig({ scrollBehavior })}
+            scrollSnapType={config.scrollSnapType}
+            onScrollSnapTypeChange={(scrollSnapType) => updateConfig({ scrollSnapType })}
+            scrollSnapAlign={config.scrollSnapAlign}
+            onScrollSnapAlignChange={(scrollSnapAlign) => updateConfig({ scrollSnapAlign })}
+            resize={config.resize}
+            onResizeChange={(resize) => updateConfig({ resize })}
+            appearance={config.appearance}
+            onAppearanceChange={(appearance) => updateConfig({ appearance })}
+          />
+        );
+
+      case 'visibility':
+        return (
+          <VisibilityPanel
+            visibility={config.visibility}
+            onVisibilityChange={(visibility) => updateConfig({ visibility })}
+            opacity={config.opacity}
+            onOpacityChange={(opacity) => updateConfig({ opacity })}
+            overflow={config.overflow}
+            onOverflowChange={(overflow) => updateConfig({ overflow })}
+            overflowX={config.overflowX}
+            onOverflowXChange={(overflowX) => updateConfig({ overflowX })}
+            overflowY={config.overflowY}
+            onOverflowYChange={(overflowY) => updateConfig({ overflowY })}
+            zIndex={config.zIndex}
+            onZIndexChange={(zIndex) => updateConfig({ zIndex })}
+          />
+        );
+
+      case 'responsive':
+        return (
+          <ResponsivePanel
+            mediaQueries={config.mediaQueries}
+            onMediaQueriesChange={(mediaQueries) => updateConfig({ mediaQueries })}
+            containerQueries={config.containerQueries}
+            onContainerQueriesChange={(containerQueries) => updateConfig({ containerQueries })}
+          />
+        );
+
+      case 'clippath':
+        return (
+          <ClipPathPanel
+            clipPath={config.clipPath}
+            onClipPathChange={(clipPath) => updateConfig({ clipPath })}
+          />
+        );
+
+      case 'variables':
+        return (
+          <VariablesPanel
+            customProperties={config.customProperties}
+            onCustomPropertiesChange={(customProperties) => updateConfig({ customProperties })}
+          />
+        );
+
+      case 'modern':
+        return (
+          <ModernCSSPanel
+            colorScheme={config.colorScheme}
+            onColorSchemeChange={(colorScheme) => updateConfig({ colorScheme })}
+            accentColor={config.accentColor}
+            onAccentColorChange={(accentColor) => updateConfig({ accentColor })}
+            containerType={config.containerType}
+            onContainerTypeChange={(containerType) => updateConfig({ containerType })}
+            containerName={config.containerName}
+            onContainerNameChange={(containerName) => updateConfig({ containerName })}
           />
         );
       
