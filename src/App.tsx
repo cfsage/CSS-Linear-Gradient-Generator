@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { Sidebar } from './components/Layout/Sidebar';
 import { Header } from './components/Layout/Header';
 import { Preview } from './components/Layout/Preview';
@@ -24,7 +25,7 @@ import { CodePanel } from './components/Panels/CodePanel';
 import { useStyleConfig } from './hooks/useStyleConfig';
 import { gradientPresets } from './data/presets';
 
-function App() {
+function AppContent() {
   const [activeTab, setActiveTab] = useState('gradients');
   const [copied, setCopied] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
@@ -576,7 +577,7 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
       
       default:
         return (
-          <div className="p-6 text-center text-gray-500">
+          <div className="p-6 text-center text-gray-500 dark:text-gray-400">
             <p>Panel for "{activeTab}" is coming soon!</p>
             <p className="text-sm mt-2">This comprehensive CSS tool will include all advanced features.</p>
           </div>
@@ -585,7 +586,7 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
   };
 
   return (
-    <div className={`min-h-screen bg-gray-100 ${fullscreen ? 'fixed inset-0 z-50' : ''}`}>
+    <div className={`min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 ${fullscreen ? 'fixed inset-0 z-50' : ''}`}>
       <div className="flex flex-col h-screen">
         <Header
           copied={copied}
@@ -611,9 +612,9 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
 
           <div className="flex flex-1 overflow-hidden">
             {!previewMode && (
-              <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
+              <div className="w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto transition-colors duration-300">
                 <div className="p-4">
-                  <h2 className="text-lg font-semibold text-gray-800 mb-4 capitalize">
+                  <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 capitalize">
                     {activeTab} Settings
                   </h2>
                   {renderPanel()}
@@ -633,6 +634,14 @@ ${css.split(';').filter(rule => rule.trim()).map(rule => `  ${rule.trim()};`).jo
         </div>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

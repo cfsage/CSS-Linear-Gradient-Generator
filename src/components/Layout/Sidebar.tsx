@@ -31,9 +31,9 @@ const sidebarTabs = [
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   return (
-    <div className="w-64 bg-white border-r border-gray-200 h-full overflow-y-auto">
+    <div className="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 h-full overflow-y-auto transition-colors duration-300">
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">CSS Properties</h2>
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">CSS Properties</h2>
         <nav className="space-y-1">
           {sidebarTabs.map((tab) => {
             const Icon = tab.icon;
@@ -41,10 +41,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
               <button
                 key={tab.id}
                 onClick={() => onTabChange(tab.id)}
-                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-all duration-200 ${
                   activeTab === tab.id
-                    ? 'bg-purple-100 text-purple-700 border border-purple-200'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
+                    ? 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-700 shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-800 dark:hover:text-gray-200'
                 }`}
               >
                 <Icon size={18} />
