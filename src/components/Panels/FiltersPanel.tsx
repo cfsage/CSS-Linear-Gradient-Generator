@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sliders, RotateCcw, Eye } from 'lucide-react';
+import { SliderControl } from '../Common/SliderControl';
 
 interface FiltersPanelProps {
   filter: string;
@@ -120,53 +121,6 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
     }
   };
 
-  const FilterControl = ({ 
-    label, 
-    value, 
-    onChange, 
-    min = 0, 
-    max = 200, 
-    step = 1, 
-    unit = '', 
-    isBackdrop = false 
-  }: {
-    label: string;
-    value: number;
-    onChange: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-    unit?: string;
-    isBackdrop?: boolean;
-  }) => (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-700">{label}</label>
-        <span className="text-xs text-gray-500">{value}{unit}</span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <input
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-16 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-        />
-      </div>
-    </div>
-  );
-
   const presets = [
     { name: 'None', value: 'none' },
     { name: 'Blur', value: 'blur(5px)' },
@@ -195,7 +149,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             <button
               key={preset.name}
               onClick={() => onFilterChange(preset.value)}
-              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors border border-purple-200"
+              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-all duration-200 border border-purple-200 hover:border-purple-300 hover:shadow-sm"
             >
               {preset.name}
             </button>
@@ -212,7 +166,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
           </h3>
           <button
             onClick={() => resetFilters(false)}
-            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-all duration-200"
           >
             <RotateCcw size={12} />
             <span>Reset</span>
@@ -220,7 +174,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
         </div>
 
         <div className="space-y-4">
-          <FilterControl
+          <SliderControl
             label="Blur"
             value={filterValues.blur}
             onChange={(value) => updateFilterValue('blur', value)}
@@ -228,9 +182,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={50}
             step={0.1}
             unit="px"
+            color="blue"
           />
 
-          <FilterControl
+          <SliderControl
             label="Brightness"
             value={filterValues.brightness}
             onChange={(value) => updateFilterValue('brightness', value)}
@@ -238,9 +193,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={300}
             step={1}
             unit="%"
+            color="yellow"
           />
 
-          <FilterControl
+          <SliderControl
             label="Contrast"
             value={filterValues.contrast}
             onChange={(value) => updateFilterValue('contrast', value)}
@@ -248,9 +204,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={300}
             step={1}
             unit="%"
+            color="purple"
           />
 
-          <FilterControl
+          <SliderControl
             label="Grayscale"
             value={filterValues.grayscale}
             onChange={(value) => updateFilterValue('grayscale', value)}
@@ -258,9 +215,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={100}
             step={1}
             unit="%"
+            color="red"
           />
 
-          <FilterControl
+          <SliderControl
             label="Hue Rotate"
             value={filterValues.hueRotate}
             onChange={(value) => updateFilterValue('hueRotate', value)}
@@ -268,9 +226,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={360}
             step={1}
             unit="deg"
+            color="green"
           />
 
-          <FilterControl
+          <SliderControl
             label="Invert"
             value={filterValues.invert}
             onChange={(value) => updateFilterValue('invert', value)}
@@ -278,9 +237,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={100}
             step={1}
             unit="%"
+            color="blue"
           />
 
-          <FilterControl
+          <SliderControl
             label="Opacity"
             value={filterValues.opacity}
             onChange={(value) => updateFilterValue('opacity', value)}
@@ -288,9 +248,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={100}
             step={1}
             unit="%"
+            color="purple"
           />
 
-          <FilterControl
+          <SliderControl
             label="Saturate"
             value={filterValues.saturate}
             onChange={(value) => updateFilterValue('saturate', value)}
@@ -298,9 +259,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={300}
             step={1}
             unit="%"
+            color="green"
           />
 
-          <FilterControl
+          <SliderControl
             label="Sepia"
             value={filterValues.sepia}
             onChange={(value) => updateFilterValue('sepia', value)}
@@ -308,6 +270,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={100}
             step={1}
             unit="%"
+            color="yellow"
           />
 
           {/* Drop Shadow Controls */}
@@ -315,7 +278,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             <h4 className="text-xs font-semibold text-gray-700">Drop Shadow</h4>
             
             <div className="grid grid-cols-2 gap-3">
-              <FilterControl
+              <SliderControl
                 label="X Offset"
                 value={filterValues.dropShadowX}
                 onChange={(value) => updateFilterValue('dropShadowX', value)}
@@ -323,8 +286,9 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
                 max={50}
                 step={1}
                 unit="px"
+                color="blue"
               />
-              <FilterControl
+              <SliderControl
                 label="Y Offset"
                 value={filterValues.dropShadowY}
                 onChange={(value) => updateFilterValue('dropShadowY', value)}
@@ -332,10 +296,11 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
                 max={50}
                 step={1}
                 unit="px"
+                color="green"
               />
             </div>
 
-            <FilterControl
+            <SliderControl
               label="Blur Radius"
               value={filterValues.dropShadowBlur}
               onChange={(value) => updateFilterValue('dropShadowBlur', value)}
@@ -343,6 +308,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
               max={50}
               step={1}
               unit="px"
+              color="purple"
             />
 
             <div className="space-y-2">
@@ -352,13 +318,13 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
                   type="color"
                   value={filterValues.dropShadowColor}
                   onChange={(e) => updateFilterValue('dropShadowColor', e.target.value)}
-                  className="w-8 h-8 rounded border-2 border-gray-200 cursor-pointer"
+                  className="w-8 h-8 rounded border-2 border-gray-200 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg"
                 />
                 <input
                   type="text"
                   value={filterValues.dropShadowColor}
                   onChange={(e) => updateFilterValue('dropShadowColor', e.target.value)}
-                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="flex-1 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300"
                 />
               </div>
             </div>
@@ -372,7 +338,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
           <h3 className="text-sm font-semibold text-gray-800">Backdrop Filter Controls</h3>
           <button
             onClick={() => resetFilters(true)}
-            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-all duration-200"
           >
             <RotateCcw size={12} />
             <span>Reset</span>
@@ -380,7 +346,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
         </div>
 
         <div className="space-y-4">
-          <FilterControl
+          <SliderControl
             label="Backdrop Blur"
             value={backdropValues.blur}
             onChange={(value) => updateFilterValue('blur', value, true)}
@@ -388,10 +354,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={50}
             step={0.1}
             unit="px"
-            isBackdrop={true}
+            color="blue"
           />
 
-          <FilterControl
+          <SliderControl
             label="Backdrop Brightness"
             value={backdropValues.brightness}
             onChange={(value) => updateFilterValue('brightness', value, true)}
@@ -399,10 +365,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={300}
             step={1}
             unit="%"
-            isBackdrop={true}
+            color="yellow"
           />
 
-          <FilterControl
+          <SliderControl
             label="Backdrop Contrast"
             value={backdropValues.contrast}
             onChange={(value) => updateFilterValue('contrast', value, true)}
@@ -410,10 +376,10 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={300}
             step={1}
             unit="%"
-            isBackdrop={true}
+            color="purple"
           />
 
-          <FilterControl
+          <SliderControl
             label="Backdrop Saturate"
             value={backdropValues.saturate}
             onChange={(value) => updateFilterValue('saturate', value, true)}
@@ -421,7 +387,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
             max={300}
             step={1}
             unit="%"
-            isBackdrop={true}
+            color="green"
           />
         </div>
       </div>
@@ -434,7 +400,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
           onChange={(e) => onFilterChange(e.target.value)}
           placeholder="blur(5px) brightness(1.2) contrast(1.1)"
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
         />
       </div>
 
@@ -446,7 +412,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
           onChange={(e) => onBackdropFilterChange(e.target.value)}
           placeholder="blur(10px) saturate(180%)"
           rows={2}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
         />
       </div>
     </div>

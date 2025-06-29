@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Move, RotateCw, Maximize, RotateCcw } from 'lucide-react';
+import { SliderControl } from '../Common/SliderControl';
 
 interface TransformsPanelProps {
   transform: string;
@@ -112,56 +113,6 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
     onTransformChange('none');
   };
 
-  const TransformControl = ({ 
-    label, 
-    value, 
-    onChange, 
-    min = -360, 
-    max = 360, 
-    step = 1, 
-    unit = '',
-    icon 
-  }: {
-    label: string;
-    value: number;
-    onChange: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-    unit?: string;
-    icon?: React.ReactNode;
-  }) => (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-700 flex items-center space-x-1">
-          {icon}
-          <span>{label}</span>
-        </label>
-        <span className="text-xs text-gray-500">{value}{unit}</span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <input
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-20 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-        />
-      </div>
-    </div>
-  );
-
   const presets = [
     { name: 'None', value: 'none' },
     { name: 'Scale Up', value: 'scale(1.1)' },
@@ -202,7 +153,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
             <button
               key={preset.name}
               onClick={() => onTransformChange(preset.value)}
-              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors border border-purple-200"
+              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-all duration-200 border border-purple-200 hover:border-purple-300 hover:shadow-sm"
             >
               {preset.name}
             </button>
@@ -216,7 +167,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
           <h3 className="text-sm font-semibold text-gray-800">Transform Controls</h3>
           <button
             onClick={resetTransforms}
-            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded transition-all duration-200"
           >
             <RotateCcw size={12} />
             <span>Reset</span>
@@ -225,7 +176,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
 
         {/* Perspective */}
         <div className="p-3 bg-blue-50 rounded-lg">
-          <TransformControl
+          <SliderControl
             label="Perspective"
             value={transformValues.perspective}
             onChange={(value) => updateTransformValue('perspective', value)}
@@ -234,6 +185,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
             step={10}
             unit="px"
             icon={<Maximize size={12} />}
+            color="blue"
           />
         </div>
 
@@ -245,7 +197,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
           </h4>
           
           <div className="grid grid-cols-1 gap-3">
-            <TransformControl
+            <SliderControl
               label="Translate X"
               value={transformValues.translateX}
               onChange={(value) => updateTransformValue('translateX', value)}
@@ -253,8 +205,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={500}
               step={1}
               unit="px"
+              color="green"
             />
-            <TransformControl
+            <SliderControl
               label="Translate Y"
               value={transformValues.translateY}
               onChange={(value) => updateTransformValue('translateY', value)}
@@ -262,8 +215,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={500}
               step={1}
               unit="px"
+              color="green"
             />
-            <TransformControl
+            <SliderControl
               label="Translate Z"
               value={transformValues.translateZ}
               onChange={(value) => updateTransformValue('translateZ', value)}
@@ -271,6 +225,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={500}
               step={1}
               unit="px"
+              color="green"
             />
           </div>
         </div>
@@ -283,7 +238,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
           </h4>
           
           <div className="grid grid-cols-1 gap-3">
-            <TransformControl
+            <SliderControl
               label="Scale X"
               value={transformValues.scaleX}
               onChange={(value) => updateTransformValue('scaleX', value)}
@@ -291,8 +246,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={3}
               step={0.01}
               unit=""
+              color="yellow"
             />
-            <TransformControl
+            <SliderControl
               label="Scale Y"
               value={transformValues.scaleY}
               onChange={(value) => updateTransformValue('scaleY', value)}
@@ -300,8 +256,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={3}
               step={0.01}
               unit=""
+              color="yellow"
             />
-            <TransformControl
+            <SliderControl
               label="Scale Z"
               value={transformValues.scaleZ}
               onChange={(value) => updateTransformValue('scaleZ', value)}
@@ -309,6 +266,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={3}
               step={0.01}
               unit=""
+              color="yellow"
             />
           </div>
         </div>
@@ -321,7 +279,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
           </h4>
           
           <div className="grid grid-cols-1 gap-3">
-            <TransformControl
+            <SliderControl
               label="Rotate X"
               value={transformValues.rotateX}
               onChange={(value) => updateTransformValue('rotateX', value)}
@@ -329,8 +287,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={360}
               step={1}
               unit="deg"
+              color="purple"
             />
-            <TransformControl
+            <SliderControl
               label="Rotate Y"
               value={transformValues.rotateY}
               onChange={(value) => updateTransformValue('rotateY', value)}
@@ -338,8 +297,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={360}
               step={1}
               unit="deg"
+              color="purple"
             />
-            <TransformControl
+            <SliderControl
               label="Rotate Z"
               value={transformValues.rotateZ}
               onChange={(value) => updateTransformValue('rotateZ', value)}
@@ -347,6 +307,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={360}
               step={1}
               unit="deg"
+              color="purple"
             />
           </div>
         </div>
@@ -356,7 +317,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
           <h4 className="text-xs font-semibold text-gray-700">Skew</h4>
           
           <div className="grid grid-cols-1 gap-3">
-            <TransformControl
+            <SliderControl
               label="Skew X"
               value={transformValues.skewX}
               onChange={(value) => updateTransformValue('skewX', value)}
@@ -364,8 +325,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={90}
               step={1}
               unit="deg"
+              color="red"
             />
-            <TransformControl
+            <SliderControl
               label="Skew Y"
               value={transformValues.skewY}
               onChange={(value) => updateTransformValue('skewY', value)}
@@ -373,6 +335,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
               max={90}
               step={1}
               unit="deg"
+              color="red"
             />
           </div>
         </div>
@@ -388,9 +351,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
             <button
               key={preset.name}
               onClick={() => onTransformOriginChange(preset.value)}
-              className={`px-2 py-1 text-xs rounded transition-colors ${
+              className={`px-2 py-1 text-xs rounded transition-all duration-200 ${
                 transformOrigin === preset.value
-                  ? 'bg-purple-500 text-white'
+                  ? 'bg-purple-500 text-white shadow-sm'
                   : 'bg-gray-100 hover:bg-gray-200'
               }`}
             >
@@ -401,7 +364,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
 
         {/* Custom Origin Controls */}
         <div className="space-y-3">
-          <TransformControl
+          <SliderControl
             label="Origin X"
             value={originValues.x}
             onChange={(value) => updateOrigin('x', value)}
@@ -409,8 +372,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
             max={100}
             step={1}
             unit="%"
+            color="blue"
           />
-          <TransformControl
+          <SliderControl
             label="Origin Y"
             value={originValues.y}
             onChange={(value) => updateOrigin('y', value)}
@@ -418,8 +382,9 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
             max={100}
             step={1}
             unit="%"
+            color="green"
           />
-          <TransformControl
+          <SliderControl
             label="Origin Z"
             value={originValues.z}
             onChange={(value) => updateOrigin('z', value)}
@@ -427,6 +392,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
             max={500}
             step={1}
             unit="px"
+            color="purple"
           />
         </div>
       </div>
@@ -439,7 +405,7 @@ export const TransformsPanel: React.FC<TransformsPanelProps> = ({
           onChange={(e) => onTransformChange(e.target.value)}
           placeholder="scale(1.1) rotate(5deg) translateX(10px)"
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
         />
       </div>
     </div>

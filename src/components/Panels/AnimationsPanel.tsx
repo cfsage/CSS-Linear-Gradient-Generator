@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Play, Pause, RotateCcw, Zap, Clock } from 'lucide-react';
+import { SliderControl } from '../Common/SliderControl';
 
 interface AnimationsPanelProps {
   animation: string;
@@ -134,56 +135,6 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
   const fillModes = ['none', 'forwards', 'backwards', 'both'];
   const playStates = ['running', 'paused'];
 
-  const SliderControl = ({ 
-    label, 
-    value, 
-    onChange, 
-    min = 0, 
-    max = 10, 
-    step = 0.1, 
-    unit = 's',
-    icon 
-  }: {
-    label: string;
-    value: number;
-    onChange: (value: number) => void;
-    min?: number;
-    max?: number;
-    step?: number;
-    unit?: string;
-    icon?: React.ReactNode;
-  }) => (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <label className="text-xs font-medium text-gray-700 flex items-center space-x-1">
-          {icon}
-          <span>{label}</span>
-        </label>
-        <span className="text-xs text-gray-500">{value}{unit}</span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-        />
-        <input
-          type="number"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-20 px-2 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-        />
-      </div>
-    </div>
-  );
-
   const updateDuration = (value: number) => {
     setDurationValue(value);
     onAnimationDurationChange(`${value}s`);
@@ -215,7 +166,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
                 onAnimationChange(preset.animation);
                 setCustomKeyframes(preset.keyframes);
               }}
-              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors border border-purple-200"
+              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-all duration-200 border border-purple-200 hover:border-purple-300 hover:shadow-sm"
             >
               {preset.name}
             </button>
@@ -230,10 +181,10 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
           <div className="flex items-center space-x-2">
             <button
               onClick={() => onAnimationPlayStateChange(animationPlayState === 'running' ? 'paused' : 'running')}
-              className={`flex items-center space-x-1 px-2 py-1 text-xs rounded transition-colors ${
+              className={`flex items-center space-x-1 px-3 py-1.5 text-xs rounded-md transition-all duration-200 ${
                 animationPlayState === 'running'
-                  ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                  : 'bg-green-100 text-green-700 hover:bg-green-200'
+                  ? 'bg-red-100 text-red-700 hover:bg-red-200 hover:shadow-sm'
+                  : 'bg-green-100 text-green-700 hover:bg-green-200 hover:shadow-sm'
               }`}
             >
               {animationPlayState === 'running' ? <Pause size={12} /> : <Play size={12} />}
@@ -250,7 +201,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
             value={animationName}
             onChange={(e) => onAnimationNameChange(e.target.value)}
             placeholder="myAnimation"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           />
         </div>
 
@@ -264,6 +215,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
           step={0.1}
           unit="s"
           icon={<Clock size={12} />}
+          color="purple"
         />
 
         {/* Delay */}
@@ -276,6 +228,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
           step={0.1}
           unit="s"
           icon={<Clock size={12} />}
+          color="blue"
         />
 
         {/* Iteration Count */}
@@ -287,6 +240,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
           max={999}
           step={1}
           unit={iterationValue === 999 ? ' (infinite)' : ''}
+          color="green"
         />
 
         {/* Timing Function */}
@@ -295,7 +249,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
           <select
             value={animationTimingFunction}
             onChange={(e) => onAnimationTimingFunctionChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
           >
             {timingFunctions.map((func) => (
               <option key={func} value={func}>{func}</option>
@@ -310,9 +264,9 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
             {directions.map((direction) => (
               <label
                 key={direction}
-                className={`relative flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-all ${
+                className={`relative flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-all duration-200 ${
                   animationDirection === direction
-                    ? 'border-purple-500 bg-purple-50 text-purple-700'
+                    ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-sm'
                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                 }`}
               >
@@ -337,9 +291,9 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
             {fillModes.map((mode) => (
               <label
                 key={mode}
-                className={`relative flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-all ${
+                className={`relative flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-all duration-200 ${
                   animationFillMode === mode
-                    ? 'border-purple-500 bg-purple-50 text-purple-700'
+                    ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-sm'
                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                 }`}
               >
@@ -370,7 +324,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
   100% { transform: scale(1); }
 }`}
           rows={8}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
         />
       </div>
 
@@ -382,7 +336,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
           onChange={(e) => onAnimationChange(e.target.value)}
           placeholder="myAnimation 2s ease-in-out infinite"
           rows={2}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
         />
       </div>
 
@@ -391,7 +345,7 @@ export const AnimationsPanel: React.FC<AnimationsPanelProps> = ({
         <h3 className="text-sm font-semibold text-gray-800">Animation Preview</h3>
         <div className="bg-gray-100 p-8 rounded-lg flex items-center justify-center">
           <div 
-            className="w-16 h-16 bg-purple-500 rounded-lg"
+            className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg"
             style={{ 
               animation: animation || 'none',
               animationPlayState: animationPlayState 
