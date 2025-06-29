@@ -1,5 +1,5 @@
 import React from 'react';
-import { MousePointer, Hand, Eye, Cursor } from 'lucide-react';
+import { MousePointer, Hand, Eye, TextCursor as Cursor } from 'lucide-react';
 
 interface InteractionsPanelProps {
   cursor: string;
