@@ -1,26 +1,5 @@
 import React from 'react';
-import { 
-  Palette, 
-  Layout, 
-  Type, 
-  Box, 
-  Move, 
-  Layers, 
-  Zap, 
-  Image, 
-  Settings,
-  Grid3X3,
-  Flex,
-  MousePointer,
-  Eye,
-  Smartphone,
-  Code,
-  Sparkles,
-  Filter,
-  Scissors,
-  Variable,
-  Monitor
-} from 'lucide-react';
+import { Palette, Layout, Type, Box, Move, Layers, Zap, Image, Settings, Grid3X3, FileText as Flex, MousePointer, Eye, Smartphone, Code, Sparkles, Filter, Scissors, Variable, Monitor } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
