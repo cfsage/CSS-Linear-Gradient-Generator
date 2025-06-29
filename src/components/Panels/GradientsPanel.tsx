@@ -83,7 +83,7 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
     <div className="space-y-6">
       {/* Presets */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800 flex items-center space-x-2">
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 flex items-center space-x-2">
           <Palette size={16} />
           <span>Gradient Presets</span>
         </h3>
@@ -92,7 +92,7 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
             <button
               key={preset.name}
               onClick={() => onApplyPreset(preset)}
-              className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors border border-purple-200"
+              className="px-3 py-2 text-xs font-medium text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/50 rounded-md transition-all duration-200 border border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-sm"
             >
               {preset.name}
             </button>
@@ -102,15 +102,15 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
 
       {/* Gradient Type */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Gradient Type</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Gradient Type</h3>
         <div className="grid grid-cols-3 gap-2">
           {(['linear', 'radial', 'conic'] as GradientType[]).map((type) => (
             <label
               key={type}
-              className={`relative flex items-center justify-center p-3 rounded-lg border-2 cursor-pointer transition-all ${
+              className={`relative flex items-center justify-center p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                 gradientType === type
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
-                  : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 shadow-sm'
+                  : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700'
               }`}
             >
               <input
@@ -134,24 +134,24 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
             type="checkbox"
             checked={repeating}
             onChange={(e) => onRepeatingChange(e.target.checked)}
-            className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+            className="w-4 h-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500 dark:bg-gray-700 transition-all duration-200"
           />
-          <span className="text-sm font-medium text-gray-700">Repeating Gradient</span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Repeating Gradient</span>
         </label>
       </div>
 
       {/* Linear Direction */}
       {gradientType === 'linear' && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-gray-800">Direction</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Direction</h3>
           <div className="grid grid-cols-2 gap-2">
             {linearDirectionOptions.map((option) => (
               <label
                 key={option.value}
-                className={`relative flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-all ${
+                className={`relative flex items-center justify-center p-2 rounded-lg border cursor-pointer transition-all duration-200 ${
                   linearDirection === option.value
-                    ? 'border-purple-500 bg-purple-50 text-purple-700'
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                    ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 shadow-sm'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <input
@@ -168,7 +168,7 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
           </div>
           {linearDirection === 'custom' && (
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Angle: {customAngle}°
               </label>
               <input
@@ -177,7 +177,7 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
                 max="360"
                 value={customAngle}
                 onChange={(e) => onCustomAngleChange(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
               />
             </div>
           )}
@@ -187,10 +187,10 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
       {/* Color Stops */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-gray-800">Color Stops</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Color Stops</h3>
           <button
             onClick={addColorStop}
-            className="flex items-center space-x-1 px-2 py-1 bg-purple-600 text-white rounded text-xs hover:bg-purple-700 transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 bg-purple-600 text-white rounded text-xs hover:bg-purple-700 transition-all duration-200 hover:shadow-sm"
           >
             <Plus size={12} />
             <span>Add</span>
@@ -199,22 +199,22 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
         
         <div className="space-y-3">
           {colorStops.map((stop) => (
-            <div key={stop.id} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+            <div key={stop.id} className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors duration-200">
               <input
                 type="color"
                 value={stop.color}
                 onChange={(e) => updateColorStop(stop.id, 'color', e.target.value)}
-                className="w-8 h-8 rounded border-2 border-gray-200 cursor-pointer"
+                className="w-8 h-8 rounded border-2 border-gray-200 dark:border-gray-600 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg"
               />
               <input
                 type="text"
                 value={stop.color}
                 onChange={(e) => updateColorStop(stop.id, 'color', e.target.value)}
-                className="w-20 px-2 py-1 border border-gray-300 rounded text-xs focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 rounded text-xs focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300"
               />
               
               <div className="flex-1 space-y-1">
-                <label className="block text-xs font-medium text-gray-700">
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">
                   {stop.position}%
                 </label>
                 <input
@@ -223,14 +223,14 @@ export const GradientsPanel: React.FC<GradientsPanelProps> = ({
                   max="100"
                   value={stop.position}
                   onChange={(e) => updateColorStop(stop.id, 'position', Number(e.target.value))}
-                  className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-lg appearance-none cursor-pointer slider"
                 />
               </div>
               
               {colorStops.length > 2 && (
                 <button
                   onClick={() => removeColorStop(stop.id)}
-                  className="p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors"
+                  className="p-1 text-red-600 hover:text-red-800 hover:bg-red-50 dark:hover:bg-red-900/50 rounded transition-all duration-200"
                 >
                   <Trash2 size={12} />
                 </button>

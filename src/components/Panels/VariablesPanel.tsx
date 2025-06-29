@@ -101,7 +101,7 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
     <div className="space-y-6">
       {/* Common Variables */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800 flex items-center space-x-2">
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 flex items-center space-x-2">
           <Variable size={16} />
           <span>Common CSS Variables</span>
         </h3>
@@ -110,14 +110,14 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
             <button
               key={variable.name}
               onClick={() => addVariable(variable.name, variable.value, variable.description)}
-              className="flex items-center justify-between p-3 text-left text-xs bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors border border-gray-200"
+              className="flex items-center justify-between p-3 text-left text-xs bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-all duration-200 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-sm"
             >
               <div className="flex-1">
-                <div className="font-medium text-purple-600">{variable.name}</div>
-                <div className="text-gray-500 font-mono">{variable.value}</div>
-                <div className="text-gray-400 text-xs">{variable.description}</div>
+                <div className="font-medium text-purple-600 dark:text-purple-400">{variable.name}</div>
+                <div className="text-gray-500 dark:text-gray-400 font-mono">{variable.value}</div>
+                <div className="text-gray-400 dark:text-gray-500 text-xs">{variable.description}</div>
               </div>
-              <Plus size={12} className="text-gray-400" />
+              <Plus size={12} className="text-gray-400 dark:text-gray-500" />
             </button>
           ))}
         </div>
@@ -126,10 +126,10 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
       {/* Custom Variables */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-gray-800">Custom Variables</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Custom Variables</h3>
           <button
             onClick={() => addVariable('--custom-var', '#000000', 'Custom variable')}
-            className="flex items-center space-x-1 px-2 py-1 bg-purple-600 text-white rounded text-xs hover:bg-purple-700 transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 bg-purple-600 text-white rounded text-xs hover:bg-purple-700 transition-all duration-200 hover:shadow-sm"
           >
             <Plus size={12} />
             <span>Add Variable</span>
@@ -137,36 +137,36 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
         </div>
 
         {customProperties.length === 0 ? (
-          <div className="p-4 text-center text-gray-500 text-sm border-2 border-dashed border-gray-300 rounded-lg">
+          <div className="p-4 text-center text-gray-500 dark:text-gray-400 text-sm border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
             No custom variables added yet. Click "Add Variable" or select from common variables above.
           </div>
         ) : (
           <div className="space-y-3">
             {customProperties.map((variable) => (
-              <div key={variable.id} className="p-4 bg-white border border-gray-200 rounded-lg">
+              <div key={variable.id} className="p-4 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors duration-200">
                 <div className="space-y-3">
                   {/* Variable Name */}
                   <div className="space-y-1">
-                    <label className="block text-xs font-medium text-gray-700">Variable Name</label>
+                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Variable Name</label>
                     <input
                       type="text"
                       value={variable.name}
                       onChange={(e) => updateVariable(variable.id, 'name', e.target.value)}
                       placeholder="--my-variable"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
                     />
                   </div>
 
                   {/* Variable Value */}
                   <div className="space-y-1">
-                    <label className="block text-xs font-medium text-gray-700">Value</label>
+                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Value</label>
                     <div className="flex space-x-2">
                       {variable.value.startsWith('#') && (
                         <input
                           type="color"
                           value={variable.value}
                           onChange={(e) => updateVariable(variable.id, 'value', e.target.value)}
-                          className="w-10 h-10 rounded border-2 border-gray-200 cursor-pointer"
+                          className="w-10 h-10 rounded border-2 border-gray-200 dark:border-gray-600 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg"
                         />
                       )}
                       <input
@@ -174,35 +174,35 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
                         value={variable.value}
                         onChange={(e) => updateVariable(variable.id, 'value', e.target.value)}
                         placeholder="16px, #ff0000, 1.5, etc."
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm font-mono transition-all duration-200 hover:border-purple-300"
                       />
                     </div>
                   </div>
 
                   {/* Description */}
                   <div className="space-y-1">
-                    <label className="block text-xs font-medium text-gray-700">Description (optional)</label>
+                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Description (optional)</label>
                     <input
                       type="text"
                       value={variable.description}
                       onChange={(e) => updateVariable(variable.id, 'description', e.target.value)}
                       placeholder="Describe what this variable is used for"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300"
                     />
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                    <div className="text-xs text-gray-500 font-mono">
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-600">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 font-mono">
                       {variable.name}: {variable.value};
                     </div>
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => copyVariable(variable)}
-                        className={`flex items-center space-x-1 px-2 py-1 text-xs rounded transition-colors ${
+                        className={`flex items-center space-x-1 px-2 py-1 text-xs rounded transition-all duration-200 ${
                           copied === variable.id
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300'
+                            : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500'
                         }`}
                       >
                         {copied === variable.id ? <Check size={12} /> : <Copy size={12} />}
@@ -210,7 +210,7 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
                       </button>
                       <button
                         onClick={() => removeVariable(variable.id)}
-                        className="p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors"
+                        className="p-1 text-red-600 hover:text-red-800 hover:bg-red-50 dark:hover:bg-red-900/50 rounded transition-all duration-200"
                       >
                         <Trash2 size={12} />
                       </button>
@@ -227,48 +227,47 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
       {customProperties.length > 0 && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-gray-800">Generated CSS</h3>
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Generated CSS</h3>
             <button
               onClick={copyAllVariables}
-              className={`flex items-center space-x-1 px-2 py-1 text-xs rounded transition-colors ${
+              className={`flex items-center space-x-1 px-2 py-1 text-xs rounded transition-all duration-200 ${
                 copied === 'all'
-                  ? 'bg-green-100 text-green-700'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300'
+                  : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500'
               }`}
             >
               {copied === 'all' ? <Check size={12} /> : <Copy size={12} />}
               <span>{copied === 'all' ? 'Copied!' : 'Copy All'}</span>
             </button>
           </div>
-          <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm font-mono">
+          <pre className="bg-gray-900 dark:bg-gray-950 text-green-400 dark:text-green-300 p-4 rounded-lg overflow-x-auto text-sm font-mono border border-gray-700 dark:border-gray-600">
             <code>{generateCSSVariables()}</code>
           </pre>
         </div>
-      
       )}
 
       {/* Variable Usage Examples */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Usage Examples</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Usage Examples</h3>
         <div className="space-y-2 text-xs">
-          <div className="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-            <div className="font-medium text-blue-800 mb-1">Using Variables in CSS</div>
-            <code className="text-blue-600 font-mono">
+          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-400">
+            <div className="font-medium text-blue-800 dark:text-blue-300 mb-1">Using Variables in CSS</div>
+            <code className="text-blue-600 dark:text-blue-400 font-mono">
               color: var(--primary-color);<br />
               margin: var(--spacing-md);<br />
               font-size: var(--font-size-lg);
             </code>
           </div>
-          <div className="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
-            <div className="font-medium text-green-800 mb-1">With Fallback Values</div>
-            <code className="text-green-600 font-mono">
+          <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-400">
+            <div className="font-medium text-green-800 dark:text-green-300 mb-1">With Fallback Values</div>
+            <code className="text-green-600 dark:text-green-400 font-mono">
               color: var(--text-color, #333);<br />
               padding: var(--spacing-md, 16px);
             </code>
           </div>
-          <div className="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
-            <div className="font-medium text-yellow-800 mb-1">Dynamic Updates with JavaScript</div>
-            <code className="text-yellow-600 font-mono">
+          <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border-l-4 border-yellow-400">
+            <div className="font-medium text-yellow-800 dark:text-yellow-300 mb-1">Dynamic Updates with JavaScript</div>
+            <code className="text-yellow-600 dark:text-yellow-400 font-mono">
               document.documentElement.style<br />
               .setProperty('--primary-color', '#ff0000');
             </code>
@@ -278,14 +277,14 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
 
       {/* Variable Categories */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Variable Categories</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Variable Categories</h3>
         <div className="grid grid-cols-2 gap-2">
           <button
             onClick={() => {
               const colorVars = commonVariables.filter(v => v.name.includes('color'));
               colorVars.forEach(v => addVariable(v.name, v.value, v.description));
             }}
-            className="px-3 py-2 text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-colors border border-blue-200"
+            className="px-3 py-2 text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 rounded-md transition-all duration-200 border border-blue-200 dark:border-blue-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-sm"
           >
             Add All Colors
           </button>
@@ -294,7 +293,7 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
               const spacingVars = commonVariables.filter(v => v.name.includes('spacing'));
               spacingVars.forEach(v => addVariable(v.name, v.value, v.description));
             }}
-            className="px-3 py-2 text-xs font-medium text-green-600 hover:text-green-800 hover:bg-green-50 rounded-md transition-colors border border-green-200"
+            className="px-3 py-2 text-xs font-medium text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 hover:bg-green-50 dark:hover:bg-green-900/50 rounded-md transition-all duration-200 border border-green-200 dark:border-green-700 hover:border-green-300 dark:hover:border-green-600 hover:shadow-sm"
           >
             Add All Spacing
           </button>
@@ -303,7 +302,7 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
               const fontVars = commonVariables.filter(v => v.name.includes('font'));
               fontVars.forEach(v => addVariable(v.name, v.value, v.description));
             }}
-            className="px-3 py-2 text-xs font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-md transition-colors border border-purple-200"
+            className="px-3 py-2 text-xs font-medium text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/50 rounded-md transition-all duration-200 border border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-sm"
           >
             Add All Typography
           </button>
@@ -312,7 +311,7 @@ export const VariablesPanel: React.FC<VariablesPanelProps> = ({
               const transitionVars = commonVariables.filter(v => v.name.includes('transition') || v.name.includes('z-index'));
               transitionVars.forEach(v => addVariable(v.name, v.value, v.description));
             }}
-            className="px-3 py-2 text-xs font-medium text-orange-600 hover:text-orange-800 hover:bg-orange-50 rounded-md transition-colors border border-orange-200"
+            className="px-3 py-2 text-xs font-medium text-orange-600 dark:text-orange-400 hover:text-orange-800 dark:hover:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-900/50 rounded-md transition-all duration-200 border border-orange-200 dark:border-orange-700 hover:border-orange-300 dark:hover:border-orange-600 hover:shadow-sm"
           >
             Add All Utilities
           </button>
