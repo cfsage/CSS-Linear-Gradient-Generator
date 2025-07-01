@@ -106,20 +106,20 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
     <div className="space-y-6">
       {/* Box Shadow */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Box Shadow</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Box Shadow</h3>
         <input
           type="text"
           value={boxShadow}
           onChange={(e) => onBoxShadowChange(e.target.value)}
           placeholder="0 2px 4px rgba(0,0,0,0.1)"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
         <div className="grid grid-cols-2 gap-1">
           {boxShadowPresets.map((preset, index) => (
             <button
               key={index}
               onClick={() => onBoxShadowChange(preset)}
-              className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors text-left"
+              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-all duration-200 text-left"
               title={preset}
             >
               {preset === 'none' ? 'None' : `Shadow ${index}`}
@@ -130,20 +130,20 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
 
       {/* Text Shadow */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Text Shadow</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Text Shadow</h3>
         <input
           type="text"
           value={textShadow}
           onChange={(e) => onTextShadowChange(e.target.value)}
           placeholder="2px 2px 4px rgba(0,0,0,0.5)"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
         <div className="grid grid-cols-2 gap-1">
           {textShadowPresets.map((preset, index) => (
             <button
               key={index}
               onClick={() => onTextShadowChange(preset)}
-              className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors text-left"
+              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-all duration-200 text-left"
               title={preset}
             >
               {preset === 'none' ? 'None' : `Text ${index}`}
@@ -154,20 +154,20 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
 
       {/* Filter */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Filter</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Filter</h3>
         <input
           type="text"
           value={filter}
           onChange={(e) => onFilterChange(e.target.value)}
           placeholder="blur(5px) brightness(1.2)"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
         <div className="grid grid-cols-2 gap-1">
           {filterPresets.map((preset, index) => (
             <button
               key={index}
               onClick={() => onFilterChange(preset)}
-              className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors text-left"
+              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-all duration-200 text-left"
               title={preset}
             >
               {preset === 'none' ? 'None' : `Filter ${index}`}
@@ -178,20 +178,20 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
 
       {/* Backdrop Filter */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Backdrop Filter</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Backdrop Filter</h3>
         <input
           type="text"
           value={backdropFilter}
           onChange={(e) => onBackdropFilterChange(e.target.value)}
           placeholder="blur(10px)"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
         <div className="grid grid-cols-2 gap-1">
           {backdropFilterPresets.map((preset, index) => (
             <button
               key={index}
               onClick={() => onBackdropFilterChange(preset)}
-              className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors text-left"
+              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-all duration-200 text-left"
               title={preset}
             >
               {preset === 'none' ? 'None' : `Backdrop ${index}`}
@@ -202,20 +202,20 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
 
       {/* Transform */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Transform</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Transform</h3>
         <input
           type="text"
           value={transform}
           onChange={(e) => onTransformChange(e.target.value)}
           placeholder="scale(1.1) rotate(5deg)"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
         <div className="grid grid-cols-2 gap-1">
           {transformPresets.map((preset, index) => (
             <button
               key={index}
               onClick={() => onTransformChange(preset)}
-              className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors text-left"
+              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-all duration-200 text-left"
               title={preset}
             >
               {preset === 'none' ? 'None' : `Transform ${index}`}
@@ -226,20 +226,20 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
 
       {/* Transform Origin */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Transform Origin</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Transform Origin</h3>
         <input
           type="text"
           value={transformOrigin}
           onChange={(e) => onTransformOriginChange(e.target.value)}
           placeholder="center"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
         <div className="grid grid-cols-3 gap-1">
           {transformOriginPresets.map((preset) => (
             <button
               key={preset}
               onClick={() => onTransformOriginChange(preset)}
-              className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors text-center"
+              className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-all duration-200 text-center"
             >
               {preset}
             </button>
@@ -248,9 +248,9 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
       </div>
 
       {/* Visual Transform Origin Control */}
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <div className="text-xs text-gray-600 mb-2">Visual Transform Origin</div>
-        <div className="relative bg-blue-100 p-8 rounded-lg">
+      <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">Visual Transform Origin</div>
+        <div className="relative bg-blue-100 dark:bg-blue-900/30 p-8 rounded-lg border border-blue-200 dark:border-blue-700">
           <div className="grid grid-cols-3 gap-1 h-full">
             {[
               'top left', 'top', 'top right',
@@ -260,10 +260,10 @@ export const EffectsPanel: React.FC<EffectsPanelProps> = ({
               <button
                 key={origin}
                 onClick={() => onTransformOriginChange(origin)}
-                className={`p-2 rounded text-xs transition-colors ${
+                className={`p-2 rounded text-xs transition-all duration-200 ${
                   transformOrigin === origin
-                    ? 'bg-purple-500 text-white'
-                    : 'bg-white hover:bg-gray-100'
+                    ? 'bg-purple-500 text-white shadow-sm'
+                    : 'bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
                 }`}
               >
                 {origin.replace(' ', '-')}

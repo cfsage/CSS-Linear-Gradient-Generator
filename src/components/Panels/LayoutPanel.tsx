@@ -72,11 +72,11 @@ export const LayoutPanel: React.FC<LayoutPanelProps> = ({
     <div className="space-y-6">
       {/* Display */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Display</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Display</h3>
         <select
           value={display}
           onChange={(e) => onDisplayChange(e.target.value as DisplayType)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         >
           {displayOptions.map((option) => (
             <option key={option} value={option}>{option}</option>
@@ -86,11 +86,11 @@ export const LayoutPanel: React.FC<LayoutPanelProps> = ({
 
       {/* Position */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Position</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Position</h3>
         <select
           value={position}
           onChange={(e) => onPositionChange(e.target.value as PositionType)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         >
           {positionOptions.map((option) => (
             <option key={option} value={option}>{option}</option>
@@ -101,46 +101,46 @@ export const LayoutPanel: React.FC<LayoutPanelProps> = ({
       {/* Position Values */}
       {position !== 'static' && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-gray-800">Position Values</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Position Values</h3>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Top</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Top</label>
               <input
                 type="text"
                 value={top}
                 onChange={(e) => onTopChange(e.target.value)}
                 placeholder="auto"
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
               />
             </div>
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Right</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Right</label>
               <input
                 type="text"
                 value={right}
                 onChange={(e) => onRightChange(e.target.value)}
                 placeholder="auto"
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
               />
             </div>
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Bottom</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Bottom</label>
               <input
                 type="text"
                 value={bottom}
                 onChange={(e) => onBottomChange(e.target.value)}
                 placeholder="auto"
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
               />
             </div>
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Left</label>
+              <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Left</label>
               <input
                 type="text"
                 value={left}
                 onChange={(e) => onLeftChange(e.target.value)}
                 placeholder="auto"
-                className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
               />
             </div>
           </div>
@@ -149,77 +149,77 @@ export const LayoutPanel: React.FC<LayoutPanelProps> = ({
 
       {/* Z-Index */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Z-Index</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Z-Index</h3>
         <input
           type="number"
           value={zIndex}
           onChange={(e) => onZIndexChange(Number(e.target.value))}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
         />
       </div>
 
       {/* Dimensions */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-800">Dimensions</h3>
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Dimensions</h3>
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Width</label>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Width</label>
             <input
               type="text"
               value={width}
               onChange={(e) => onWidthChange(e.target.value)}
               placeholder="auto"
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Height</label>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Height</label>
             <input
               type="text"
               value={height}
               onChange={(e) => onHeightChange(e.target.value)}
               placeholder="auto"
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Min Width</label>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Min Width</label>
             <input
               type="text"
               value={minWidth}
               onChange={(e) => onMinWidthChange(e.target.value)}
               placeholder="0"
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Max Width</label>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Max Width</label>
             <input
               type="text"
               value={maxWidth}
               onChange={(e) => onMaxWidthChange(e.target.value)}
               placeholder="none"
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Min Height</label>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Min Height</label>
             <input
               type="text"
               value={minHeight}
               onChange={(e) => onMinHeightChange(e.target.value)}
               placeholder="0"
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Max Height</label>
+            <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">Max Height</label>
             <input
               type="text"
               value={maxHeight}
               onChange={(e) => onMaxHeightChange(e.target.value)}
               placeholder="none"
-              className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 hover:border-purple-300 dark:hover:border-purple-600"
             />
           </div>
         </div>
